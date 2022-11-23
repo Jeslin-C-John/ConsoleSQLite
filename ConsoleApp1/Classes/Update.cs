@@ -1,25 +1,25 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1.folder
+namespace ConsoleApp1.Classes
 {
-    public class Add
+    public class Update
     {
-        public void addnew()
+        public void update()
         {
             string cs = "Data Source=./Employee.db";
             using var con = new SQLiteConnection(cs);
             con.Open();
             using var cmd = new SQLiteCommand(con);
 
-            //cmd.CommandText = "DROP TABLE IF EXISTS employee";
-            //cmd.ExecuteNonQuery();
-            //cmd.CommandText = @"CREATE TABLE employee(id INTEGER PRIMARY KEY, date TEXT, name TEXT, hours INT,status INT)";
-            //cmd.ExecuteNonQuery();
+            Console.WriteLine("\nEnter id you want to update\n");
+            int updateId = int.Parse(Console.ReadLine());
+
 
             Console.WriteLine("\nEnter Date\n");
             string enterDate = Console.ReadLine();
@@ -42,17 +42,10 @@ namespace ConsoleApp1.folder
             else
                 statusbool = false;
 
-
-            cmd.CommandText = "insert into employee(date, name, hours, status) values(@date, @name, @hours, @status)";
-            cmd.Parameters.AddWithValue("@date", trimDate);
-            cmd.Parameters.AddWithValue("@name", userName);
-            cmd.Parameters.AddWithValue("@hours", hours);
-            cmd.Parameters.AddWithValue("@status", statusbool);
-            cmd.Prepare();
+            cmd.CommandText = $"UPDATE employee SET date = '{trimDate}', name = '{userName}',hours = {hours}, status = {statusbool}  WHERE id = {updateId}";
             cmd.ExecuteNonQuery();
 
-            Console.WriteLine("\nInserted Successfully\n");
-
+            Console.WriteLine("\nUpdated Successfully\n");
         }
     }
 }
