@@ -23,7 +23,7 @@ namespace ConsoleApp1.Classes
             var searchYear =Console.ReadLine();
 
             //string stm = $"select * from employee WHERE date LIKE '___{searchMonth}_{searchYear}'";
-            string stm = "select * from employee where date > '01-02-2022'";
+            string stm = "SELECT * FROM employee WHERE date(date,'%d-%m-%y') BETWEEN '2010-10-09' AND '2022-10-10'";
 
             using var cmd = new SQLiteCommand(stm, con);
             using SQLiteDataReader rdr = cmd.ExecuteReader();
