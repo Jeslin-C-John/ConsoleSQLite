@@ -10,14 +10,14 @@ class MainMenu
         Int32 menuExit = 1;
         while (menuExit == 1)
         {
-            Console.WriteLine("Choose Option\n\n1. Add \n2. View \n3. Update \n4. Delete \n0. Exit\n");
+            Console.WriteLine("Choose Option\n\n1. Add \n2. View \n3. Update \n4. Delete \n5. Report \n0. Exit\n");
             int.TryParse(Console.ReadLine(), out int option);
 
             switch (option)
             {
                 case 1:
                     Add addobj = new Add();
-                    addobj.addnew();
+                    addobj.add();
                     break;
 
                 case 2:
@@ -33,6 +33,11 @@ class MainMenu
                 case 4:
                     Delete deleteobj = new Delete();
                     deleteobj.delete();
+                    break;
+
+                case 5:
+                    Report reportobj = new Report();
+                    reportobj.report();
                     break;
 
                 case 0:menuExit = 0;

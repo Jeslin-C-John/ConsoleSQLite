@@ -9,7 +9,7 @@ namespace ConsoleApp1.folder
 {
     public class Add
     {
-        public void addnew()
+        public void add()
         {
             string cs = "Data Source=./Employee.db";
             using var con = new SQLiteConnection(cs);
