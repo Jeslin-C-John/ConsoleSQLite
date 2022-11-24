@@ -24,8 +24,7 @@ namespace ConsoleApp1.folder
             Console.WriteLine("\nEnter Date\n");
             string enterDate = Console.ReadLine();
             var convDate = DateOnly.Parse(enterDate);
-            string fullDate = convDate.ToString();
-            string trimDate = fullDate.Substring(0, 10);
+            string stringDate = convDate.ToString("yyyy-MM-dd");
 
             Console.WriteLine("\nEnter Name\n");
             string userName = Console.ReadLine();
@@ -44,7 +43,7 @@ namespace ConsoleApp1.folder
 
 
             cmd.CommandText = "insert into employee(date, name, hours, status) values(@date, @name, @hours, @status)";
-            cmd.Parameters.AddWithValue("@date", trimDate);
+            cmd.Parameters.AddWithValue("@date", stringDate);
             cmd.Parameters.AddWithValue("@name", userName);
             cmd.Parameters.AddWithValue("@hours", hours);
             cmd.Parameters.AddWithValue("@status", statusbool);

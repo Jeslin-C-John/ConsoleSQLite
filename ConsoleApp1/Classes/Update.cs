@@ -24,8 +24,7 @@ namespace ConsoleApp1.Classes
             Console.WriteLine("\nEnter Date\n");
             string enterDate = Console.ReadLine();
             var convDate = DateOnly.Parse(enterDate);
-            string fullDate = convDate.ToString();
-            string trimDate = fullDate.Substring(0, 10);
+            string stringDate = convDate.ToString("yyyy-MM-dd");
 
             Console.WriteLine("\nEnter Name\n");
             string userName = Console.ReadLine();
@@ -42,7 +41,7 @@ namespace ConsoleApp1.Classes
             else
                 statusbool = false;
 
-            cmd.CommandText = $"UPDATE employee SET date = '{trimDate}', name = '{userName}',hours = {hours}, status = {statusbool}  WHERE id = {updateId}";
+            cmd.CommandText = $"UPDATE employee SET date = '{stringDate}', name = '{userName}',hours = {hours}, status = {statusbool}  WHERE id = {updateId}";
             cmd.ExecuteNonQuery();
 
             Console.WriteLine("\nUpdated Successfully\n");
