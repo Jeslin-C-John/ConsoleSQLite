@@ -16,15 +16,43 @@ namespace ConsoleApp1.Classes
             using var con = new SQLiteConnection(cs);
             con.Open();
 
-            Console.WriteLine("\nEnter month\n");
-            var searchMonth =Console.ReadLine();
 
             Console.WriteLine("\nEnter year\n");
-            var searchYear =Console.ReadLine();
+            int searchYear;
+            do
+            {
+                int.TryParse(Console.ReadLine(), out searchYear);
+                if (searchYear == 0)
+                {
+                    Console.WriteLine("\nEnter Valid year\n");
+                }
+            } while (searchYear == 0);
+
+
+            Console.WriteLine("\nEnter month\n");
+            int searchMonth;
+            do
+            {
+                int.TryParse(Console.ReadLine(), out searchMonth);
+                if (searchMonth == 0 || searchMonth > 12)
+                {
+                    Console.WriteLine("\nEnter Valid month\n");
+                }
+            } while (searchMonth == 0 || searchMonth>12);
+
 
             //string stm = $"select * from employee WHERE date LIKE '___{searchMonth}_{searchYear}'";
-            //string stm = $"SELECT * FROM employee WHERE date(date,'%Y-%m-%d') BETWEEN '{searchYear}-{searchMonth}-01' AND '{searchYear}-{searchMonth}-31'";
-            string stm = $"SELECT * FROM employee WHERE date BETWEEN '{searchYear}-{searchMonth}-01' AND '{searchYear}-{searchMonth}-31'";
+            string stm;
+            if (searchMonth < 10)
+            {
+                stm = $"SELECT * FROM employee WHERE date BETWEEN '{searchYear}-0{searchMonth}-01' AND '{searchYear}-0{searchMonth}-31'";
+            }
+
+        else
+            {
+                stm = $"SELECT * FROM employee WHERE date BETWEEN '{searchYear}-{searchMonth}-01' AND '{searchYear}-{searchMonth}-31'";
+            }
+            
 
             using var cmd = new SQLiteCommand(stm, con);
             using SQLiteDataReader rdr = cmd.ExecuteReader();

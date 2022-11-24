@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1.Classes;
 using ConsoleApp1.folder;
 using System.Data.SQLite;
+using static System.Net.Mime.MediaTypeNames;
 
 class MainMenu
 {
@@ -10,8 +11,23 @@ class MainMenu
         Int32 menuExit = 1;
         while (menuExit == 1)
         {
-            Console.WriteLine("Choose Option\n\n1. Add \n2. View \n3. Update \n4. Delete \n5. Report \n0. Exit\n");
-            int.TryParse(Console.ReadLine(), out int option);
+            Console.WriteLine("Choose Option\n\n1. Add \n2. View \n3. Update \n4. Delete \n5. Report \n6. Exit\n");
+
+            int option;
+
+            do
+            {
+                string optionString = Console.ReadLine();
+                int.TryParse(optionString, out option);
+
+                if (option == 0)
+                {
+                    Console.WriteLine("Invalid Input! Try Again!");
+                    Console.WriteLine("Choose Option\n\n1. Add \n2. View \n3. Update \n4. Delete \n5. Report \n6. Exit\n");
+                }
+            }while(option == 0);
+
+            
 
             switch (option)
             {
@@ -40,10 +56,10 @@ class MainMenu
                     reportobj.report();
                     break;
 
-                case 0:menuExit = 0;
+                case 6:menuExit = 0;
                     break;
 
-                default:Console.WriteLine("Wrong Option\n\n");
+                default:Console.WriteLine("Invalid Input! Try Again!");
                     break;
                     
             }

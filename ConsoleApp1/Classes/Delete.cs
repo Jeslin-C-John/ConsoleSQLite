@@ -18,7 +18,15 @@ namespace ConsoleApp1.Classes
             using var cmd = new SQLiteCommand(con);
 
             Console.WriteLine("\nEnter id you want to delete\n");
-            int deleteId = int.Parse(Console.ReadLine());
+            int deleteId;
+            do
+            {
+                int.TryParse(Console.ReadLine(), out deleteId);
+                if (deleteId == 0)
+                {
+                    Console.WriteLine("\nEnter Valid id\n");
+                }
+            } while (deleteId == 0);
 
             cmd.CommandText = $"DELETE FROM employee WHERE id = {deleteId}";
             cmd.ExecuteNonQuery();
