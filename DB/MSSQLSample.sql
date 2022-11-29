@@ -47,7 +47,30 @@
 --SELECT MIN(price) from Store.Production.items;
 --SELECT COUNT(price) from Store.Production.items;
 --SELECT SUM(price) from Store.Production.items;
+--ALTER TABLE Sales.Customers ADD UNIQUE (id);
 
+
+--SELECT orderid, ISNULL(location, 'Infopark') AS WorkLocation FROM Store.Production.Orderdetails;
+--SELECT orderid, COALESCE(location, 'Infopark') AS WorkLocation FROM Store.Production.Orderdetails;
+--SELECT itemid, CASE WHEN location IS NULL THEN 'London' ELSE location END AS location FROM Store.Production.Orderdetails;
+
+
+--CREATE FUNCTION TBF ( @name TEXT ) RETURNS TABLE AS RETURN SELECT id FROM Store.Sales.Customers WHERE lastname LIKE @name;
+--SELECT * FROM TBF('Team');
+
+--CREATE FUNCTION SVF ( @amount INT ) RETURNS INT AS BEGIN RETURN (@amount+2); END;
+--SELECT dbo.SVF(12) Discounted;
+
+--SELECT itemid, SUM(quantity) Stock FROM Store.Production.Orderdetails GROUP BY itemid ORDER BY Stock;
+--SELECT itemid, SUM(quantity) AS Stock FROM Store.Production.Orderdetails GROUP BY itemid HAVING SUM(quantity) = 12;
+
+--CREATE VIEW Cusview AS SELECT firstname, lastname FROM Store.Sales.Customers WHERE city LIKE 'Kochi';
+--SELECT * FROM Cusview;
+
+--CREATE TRIGGER Sales.hum ON  Sales.Customers AFTER INSERT AS BEGIN INSERT INTO Store.Sales.hey (data) VALUES ('Change');END
+
+--CREATE PROCEDURE customerlist AS BEGIN SELECT lastname FROM Sales.Customers ORDER BY id;END;
+--EXEC customerlist;
 
 GO
 select * from Store.Sales.Customers;
@@ -57,3 +80,4 @@ GO
 select * from Store.Production.items;
 GO
 select * from Store.Production.Orderdetails;
+GO
